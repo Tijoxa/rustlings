@@ -5,7 +5,7 @@
 // I AM NOT DONE
 
 enum Message {
-    Move {x: u8, y: u8},
+    Move(Point),
     Echo(String),
     ChangeColor((u8, u8, u8)),
     Quit
@@ -44,7 +44,7 @@ impl State {
             Message::ChangeColor(c) => self.change_color(c),
             Message::Quit => self.quit(),
             Message::Echo(s) => self.echo(s),
-            Message::Move { x, y } => self.move_position()  // voir comment gérer les dics comme ça
+            Message::Move(p) => self.move_position(p)
         }
     }
 }
