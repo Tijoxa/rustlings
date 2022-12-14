@@ -5,8 +5,10 @@
 // I AM NOT DONE
 
 enum Message {
-    Point,
-    State
+    Move {x: u8, y: u8},
+    Echo(String),
+    ChangeColor((u8, u8, u8)),
+    Quit
 }
 
 struct Point {
@@ -38,7 +40,12 @@ impl State {
     }
 
     fn process(&mut self, message: Message) {
-        // TODO: create a match expression to process the different message variants
+        match message {
+            Message::ChangeColor(c) => self.change_color(c),
+            Message::Quit => self.quit(),
+            Message::Echo(s) => self.echo(s),
+            Message::Move { x, y } => self.move_position()  // voir comment gérer les dics comme ça
+        }
     }
 }
 
