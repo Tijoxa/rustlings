@@ -6,13 +6,20 @@
 macro_rules! my_macro {
     () => {
         println!("Check out my macro!");
-    }
-    ($val:expr) => {
-        println!("Look at this other macro: {}", $val);
+    };
+    ( $x1:expr, $x2:expr ) => {
+        println!("Double argument: {}, {}", $x1, $x2);
+    };
+    ( $( $x:expr ),* ) => {
+        print!("Look at this other macro:");
+        $(
+            print!(" {}", $x);
+        )*
+        println!("");
     }
 }
 
 fn main() {
     my_macro!();
-    my_macro!(7777);
+    my_macro!(7777, 45);
 }
